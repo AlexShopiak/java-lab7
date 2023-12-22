@@ -27,6 +27,10 @@ public class StoneSet extends StoneDoublyLinkedList{
     }
 
     public boolean add(Stone element) {
+        if (collection == null) {
+            throw new NullPointerException();
+        }
+        
         if (contains(element)) {
             return false;
         } else {
@@ -36,6 +40,10 @@ public class StoneSet extends StoneDoublyLinkedList{
     }
 
     public boolean addAll(Collection<Stone> collection) {
+        if (collection == null) {
+            throw new NullPointerException();
+        }
+
         boolean oneAdded = false;
         Iterator<Stone> iterator = collection.iterator();
 
@@ -68,6 +76,10 @@ public class StoneSet extends StoneDoublyLinkedList{
     }
 
     public boolean containsAll(Collection<Stone> collection) {
+        if (collection == null) {
+            throw new NullPointerException();
+        }
+
         Iterator<Stone> iterator = collection.iterator();
 
         while (iterator.hasNext()) {
@@ -124,6 +136,10 @@ public class StoneSet extends StoneDoublyLinkedList{
     }
 
     public boolean removeAll(Collection<Stone> collection) {
+        if (collection == null) {
+            throw new NullPointerException();
+        }
+
         boolean changed = false;
 
         Iterator<Stone> iterator = collection.iterator();
@@ -139,6 +155,10 @@ public class StoneSet extends StoneDoublyLinkedList{
     }
 
     public boolean retainAll(Collection<Stone> collection) {
+        if (collection == null) {
+            throw new NullPointerException();
+        }
+
         boolean changed = false;
         int pos = 0;
 
