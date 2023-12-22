@@ -27,10 +27,10 @@ public class StoneSet extends StoneDoublyLinkedList{
     }
 
     public boolean add(Stone element) {
-        if (collection == null) {
+        if (element == null) {
             throw new NullPointerException();
         }
-        
+
         if (contains(element)) {
             return false;
         } else {
