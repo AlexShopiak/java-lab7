@@ -42,6 +42,20 @@ public class Stone{
     public int getClarity() {
         return clarity;
     }
+
+    public boolean equals(Stone stone) {
+        if (this == stone) {
+            return true;
+        }
+
+        if (stone == null || getClass() != stone.getClass()) {
+            return false;
+        }
+
+        Stone other = (Stone) stone;
+
+        return System.identityHashCode(stone) == System.identityHashCode(this);
+    }
 }
 
 
