@@ -6,7 +6,7 @@
  * (c) 2023 Oleksii Shopiak
  * All rights reserved.
  *
- * It is a typed set of Stone class ojects 
+ * It is a typed set of Stone ojects 
  * which has doubly linked array structure
  */
 package collection;
@@ -15,81 +15,166 @@ import java.util.Collection;
 import java.util.Iterator;
 import stone.Stone;
 
-public class StoneSet extends DoublyLinkedList{ 
-    public StoneSet() {
-        super();
-        //todo
-    }
+public class StoneSet extends StoneDoublyLinkedList{ 
+    public StoneSet() {}
 
     public StoneSet(Stone element) {
-        super();
-        //todo
+        add(element);
     }
 
     public StoneSet(Collection<Stone> collection) {
-        super();
-        //todo
+        addAll(collection);
     }
 
     public boolean add(Stone element) {
-        return false;
-        //todo
+        if (contains(element)) {
+            return false;
+        } else {
+            insertAtEnd_DLL(element);
+            return true;
+        }
     }
 
     public boolean addAll(Collection<Stone> collection) {
-        return false;
-        //todo
+        boolean oneAdded = false;
+        Iterator<Stone> iterator = collection.iterator();
+
+        while (iterator.hasNext()) {
+            Stone stone = iterator.next();
+            boolean addition = add(stone);
+            if (addition == true) {
+                oneAdded = true;
+            }
+        }
+
+        return oneAdded;
     }
 
-    public void clear() {}
+    public void clear() {
+        clear_DLL();
+    }
 
     public boolean contains(Stone element) {
+        Node current = head; 
+        while (current != null) { 
+            Stone stone = current.data;
+            if (stone.equals(element)) {
+                return true;
+            }
+            current = current.next; 
+        }
+
         return false;
-        //todo
     }
 
     public boolean containsAll(Collection<Stone> collection) {
-        return false;
-        //todo
+        Iterator<Stone> iterator = collection.iterator();
+
+        while (iterator.hasNext()) {
+            Stone stone = iterator.next();
+            boolean containing = contains(stone);
+            if (containing == false) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean equals(Object o) {
+        return hashCode() == o.hashCode();
     }
 
     public int hashCode() {
-        return 0;
-        //todo
+        int sum = 0;
+
+        Node current = head;
+        while (current != null) { 
+            Stone stone = current.data;
+            sum += System.identityHashCode(stone);
+            current = current.next; 
+        }
+
+        return sum;
     }
 
     public boolean isEmpty() {
-        return false;
-        //todo
+        return size() == 0;
     }
 
-    public Iterator iterator() {
-        return iterator();
-        //todo
+    public Iterator<Stone> iterator() {
+        return new Iterator_DLL();
     }
 
     public boolean remove(Stone element) {
+        Node current = head; 
+        int pos = 0;
+
+        while (current != null) { 
+            Stone stone = current.data;
+            if (stone.equals(element)) {
+                deleteAtSpecificPosition_DLL(pos);
+                return true;
+            }
+            current = current.next; 
+            pos++;
+        }
+
         return false;
-        //todo
     }
 
     public boolean removeAll(Collection<Stone> collection) {
-        return false;
-        //todo
+        boolean changed = false;
+
+        Iterator<Stone> iterator = collection.iterator();
+        while (iterator.hasNext()) {
+            Stone stone = iterator.next();
+            boolean removing = remove(stone);
+            if (removing == true) {
+                changed = true;
+            }
+        }
+
+        return changed;
     }
 
     public boolean retainAll(Collection<Stone> collection) {
-        return false;
-        //todo
+        boolean changed = false;
+        int pos = 0;
+
+        Node current = head; 
+        while (current != null) { 
+            Stone stone = current.data;
+            if (!collection.contains(stone)) {
+                deleteAtSpecificPosition_DLL(pos);
+                changed = true;
+                pos--;
+            }
+            current = current.next; 
+            pos++;
+        }
+
+        return changed;    
     }
 
     public int size() {
-        return 0;
-        //todo
+        return size_DLL();
     }
 
-    public Object[] toArray() {
-        return new Object[0];
-        //todo
+    public Stone[] toArray() {
+        int size = size();
+        Stone[] stones = new Stone[size];
+        Node current = head;
+
+        for (int i = 0; i < size; i++) {
+            stones[i] = current.data;
+            current = current.next;
+        }
+
+        return stones;
+    }
+
+    public Stone[] toArray(Stone[] array) {
+        return toArray();
     }
 }
