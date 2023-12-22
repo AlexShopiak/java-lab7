@@ -10,4 +10,3 @@
 - Запустіть проєкт <code>java -cp classes Main</code>
 
 ### Примітки
--
