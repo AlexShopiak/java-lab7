@@ -56,11 +56,11 @@ class StoneDoublyLinkedList {
   
     protected void insertAtPosition_DLL(Stone data, int position) { 
         Node temp = new Node(data); 
-        if (position == 1) { 
+        if (position == 0) { 
             insertAtBeginning_DLL(data); 
         } else { 
             Node current = head; 
-            int currPosition = 1; 
+            int currPosition = 0; 
             while (current != null
                    && currPosition < position) { 
                 current = current.next; 
@@ -112,18 +112,18 @@ class StoneDoublyLinkedList {
         temp.prev = null; 
     } 
   
-    protected void deleteAtSpecificPosition_DLL(int pos) { 
+    protected void deleteAtSpecificPosition_DLL(int pos) {
         if (head == null) { 
             return; 
         } 
   
-        if (pos == 1) { 
+        if (pos == 0) { 
             deleteAtBeginning_DLL(); 
             return; 
         } 
   
         Node current = head; 
-        int count = 1; 
+        int count = 0; 
   
         while (current != null && count != pos) { 
             current = current.next; 
@@ -180,7 +180,7 @@ class StoneDoublyLinkedList {
         }
 
         @Override
-        public Stone next() {
+        public Stone next() throws NoSuchElementException {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
