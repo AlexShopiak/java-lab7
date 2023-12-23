@@ -70,7 +70,7 @@ public class Main {
             int res9 = set.hashCode();
             int res10 = set3.hashCode();
             int res11 = set4.hashCode();
-            
+
             boolean res12 = set.equals(set3);
             boolean res13 = set.equals(set4);
             System.out.println("HashCode: " + res9);
@@ -79,9 +79,16 @@ public class Main {
             System.out.println("Equals: " + res12);//true
             System.out.println("Equals: " + res13);//true
 
-            set.addAll(null); //NullPointerException
+            //ToArray
+            Stone[] arr = set.toArray();
+            for (Stone stone : arr) {
+                System.out.println(stone);
+            }
+            
+            //Сatching
+            set.addAll(null); 
         } catch (Exception err) {
-            System.out.println("Error: " + err);
+            System.out.println("Error: " + err);//NullPointerException
         }
     }
 }
