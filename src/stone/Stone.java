@@ -54,62 +54,28 @@ public class Stone{
 
         Stone other = (Stone) stone;
 
-        return System.identityHashCode(stone) == System.identityHashCode(this);
+        return stone.weightInCarats == this.weightInCarats &&
+               stone.priceInUSDByCarat == this.priceInUSDByCarat &&
+               stone.clarity == this.clarity;
+    }
+
+    public int hashCode() {
+        int result = 17; 
+        result = 31 * result + weightInCarats;
+        result = 31 * result + priceInUSDByCarat;
+        result = 31 * result + clarity;
+        return result;
     }
 }
 
-
-/*
- * Precious Stone class and its childs
- */
 class PreciousStone extends Stone{
     PreciousStone(int weight, int price, int clarity) {
         super(weight, price, clarity);
     }
 }
 
-class Diamond extends PreciousStone{
-    Diamond(int weight, int clarity) {
-        super(weight, 3500, clarity);
-    }
-}
-
-class Emerald extends PreciousStone{
-    Emerald(int weight, int clarity) {
-        super(weight, 3000, clarity);
-    }
-}
-
-class Ruby extends PreciousStone{
-    Ruby(int weight, int clarity) {
-        super(weight, 3400, clarity);
-    }
-}
-
-
-/*
- * Semi-Precious Stone class and its childs
- */
 class SemiPreciousStone extends Stone{
     SemiPreciousStone(int weight, int price, int clarity) {
         super(weight, price, clarity);
-    }
-}
-
-class Onyx extends SemiPreciousStone{
-    Onyx(int weight, int clarity) {
-        super(weight, 50, clarity);
-    }
-}
-
-class Opal extends SemiPreciousStone{
-    Opal(int weight, int clarity) {
-        super(weight, 200, clarity);
-    }
-}
-
-class Pearl extends SemiPreciousStone{
-    Pearl(int weight, int clarity) {
-        super(weight, 100, clarity);
     }
 }
