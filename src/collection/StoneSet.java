@@ -22,15 +22,11 @@ public class StoneSet extends StoneDoublyLinkedList{
         add(element);
     }
 
-    public StoneSet(Collection<Stone> collection) {
+    public StoneSet(Collection<Stone> collection) throws NullPointerException {
         addAll(collection);
     }
 
     public boolean add(Stone element) {
-        if (element == null) {
-            throw new NullPointerException();
-        }
-
         if (contains(element)) {
             return false;
         } else {
@@ -39,7 +35,7 @@ public class StoneSet extends StoneDoublyLinkedList{
         }
     }
 
-    public boolean addAll(Collection<Stone> collection) {
+    public boolean addAll(Collection<Stone> collection) throws NullPointerException {
         if (collection == null) {
             throw new NullPointerException();
         }
@@ -75,7 +71,7 @@ public class StoneSet extends StoneDoublyLinkedList{
         return false;
     }
 
-    public boolean containsAll(Collection<Stone> collection) {
+    public boolean containsAll(Collection<Stone> collection) throws NullPointerException {
         if (collection == null) {
             throw new NullPointerException();
         }
@@ -98,12 +94,12 @@ public class StoneSet extends StoneDoublyLinkedList{
     }
 
     public int hashCode() {
-        int sum = 0;
+        int sum = 0; 
 
         Node current = head;
         while (current != null) { 
             Stone stone = current.data;
-            sum += System.identityHashCode(stone);
+            sum += (stone != null ? stone.hashCode() : 0);
             current = current.next; 
         }
 
@@ -126,6 +122,7 @@ public class StoneSet extends StoneDoublyLinkedList{
             Stone stone = current.data;
             if (stone.equals(element)) {
                 deleteAtSpecificPosition_DLL(pos);
+                System.out.println("Pos:"+pos);
                 return true;
             }
             current = current.next; 
@@ -135,7 +132,7 @@ public class StoneSet extends StoneDoublyLinkedList{
         return false;
     }
 
-    public boolean removeAll(Collection<Stone> collection) {
+    public boolean removeAll(Collection<Stone> collection) throws NullPointerException {
         if (collection == null) {
             throw new NullPointerException();
         }
@@ -154,7 +151,7 @@ public class StoneSet extends StoneDoublyLinkedList{
         return changed;
     }
 
-    public boolean retainAll(Collection<Stone> collection) {
+    public boolean retainAll(Collection<Stone> collection) throws NullPointerException {
         if (collection == null) {
             throw new NullPointerException();
         }
