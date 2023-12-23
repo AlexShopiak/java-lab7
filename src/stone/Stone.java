@@ -53,10 +53,7 @@ public class Stone{
         }
 
         Stone other = (Stone) stone;
-
-        return stone.weightInCarats == this.weightInCarats &&
-               stone.priceInUSDByCarat == this.priceInUSDByCarat &&
-               stone.clarity == this.clarity;
+        return stone.hashCode() == this.hashCode();
     }
 
     public int hashCode() {
