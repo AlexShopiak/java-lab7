@@ -11,11 +11,12 @@
 import collection.StoneSet;
 import stone.*;
 import java.util.HashSet;
+import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
         try {
-            StoneSet set = new StoneSet(new Emerald(1, 2));
+            Set<Stone> set = new StoneSet(new Emerald(1, 2));
             set.add(new Pearl(1, 2));
             set.add(new Ruby(1, 10));
 
@@ -59,11 +60,11 @@ public class Main {
             set.add(new Ruby(1,1));
             set.add(new Opal(2,3));
 
-            StoneSet set3 = new StoneSet();
+            Set<Stone> set3 = new StoneSet();
             set3.add(new Ruby(1,1));
             set3.add(new Opal(2,3));
 
-            HashSet<Stone> set4 = new HashSet<>();
+            Set<Stone> set4 = new HashSet<>();
             set4.add(new Ruby(1,1));
             set4.add(new Opal(2,3));
 
@@ -80,13 +81,13 @@ public class Main {
             System.out.println("Equals: " + res13);//true
 
             //ToArray
-            Stone[] arr = set.toArray();
-            for (Stone stone : arr) {
+            Object[] arr = set.toArray();
+            for (Object stone : arr) {
                 System.out.println(stone);
             }
             
             //Сatching
-            set.addAll(null); 
+            set.addAll(null);
         } catch (Exception err) {
             System.out.println("Error: " + err);//NullPointerException
         }
