@@ -12,6 +12,7 @@ import collection.StoneSet;
 import stone.*;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Iterator;
 
 public class Main {
     public static void main(String[] args) {
@@ -86,6 +87,15 @@ public class Main {
                 System.out.println(stone);
             }
             
+            //Iterating
+            Iterator<Stone> iterator = set.iterator();
+            while (iterator.hasNext()) {
+                Stone s = iterator.next();
+                System.out.println("ToDelete: " + s);
+                iterator.remove();
+            }
+            System.out.println("Size: " + set.size()); //0
+
             //Сatching
             set.addAll(null);
         } catch (Exception err) {
