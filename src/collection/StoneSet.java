@@ -17,7 +17,7 @@ import java.util.Iterator;
 import java.util.Set;
 import stone.Stone;
 
-public class StoneSet extends StoneDoublyLinkedList implements Set<Stone>{ 
+public class StoneSet extends StoneDoublyLinkedList implements Set<Stone> { 
     public StoneSet() {}
 
     public StoneSet(Stone element) {
@@ -28,13 +28,18 @@ public class StoneSet extends StoneDoublyLinkedList implements Set<Stone>{
         addAll(collection);
     }
 
+    @Override
     public boolean add(Stone element) {
+        if (element == null) {
+            throw new NullPointerException();
+        }
+
         if (contains(element)) {
             return false;
-        } else {
-            insertAtEnd_DLL(element);
-            return true;
         }
+
+        insertAtEnd_DLL(element);
+        return true;
     }
 
     @Override
@@ -47,33 +52,37 @@ public class StoneSet extends StoneDoublyLinkedList implements Set<Stone>{
         Iterator<?> iterator = collection.iterator();
 
         while (iterator.hasNext()) {
-            Object obj = iterator.next();
-            if (obj instanceof Stone) {
-                Stone stone = (Stone) obj;
-                boolean addition = add(stone);
-                if (addition) changed = true;
+            Object o = iterator.next();
+            if (o == null) {
+                throw new NullPointerException();
             }
+            Stone stone = (Stone) o;
+            boolean addition = add(stone);
+            if (addition) changed = true;
         }
 
         return changed;
     }
 
     @Override
-    public void clear() {//can
+    public void clear() {
         clear_DLL();
     }
 
     @Override
     public boolean contains(Object element) {
+        if (element == null) {
+            throw new NullPointerException();
+        }
+
         if (!(element instanceof Stone)) {
             return false;
         }
 
-        //Stone stoneElement = (Stone) element;
         Node current = head; 
         while (current != null) { 
             Stone stone = current.data;
-            if (stone.equals(element)) {
+            if (stone.equals((Stone) element)) {
                 return true;
             }
             current = current.next; 
@@ -92,19 +101,22 @@ public class StoneSet extends StoneDoublyLinkedList implements Set<Stone>{
 
         while (iterator.hasNext()) {
             Object obj = iterator.next();
-            if (obj instanceof Stone) {
-                //Stone stone = (Stone) obj;
-                boolean containing = contains(obj);
-                if (!containing) return false;
+            if (obj == null) {
+                throw new NullPointerException();
             }
+            if (!(obj instanceof Stone)) {
+                return false;
+            }
+            boolean containing = contains(obj);
+            if (!containing) return false;
         }
 
         return true;
     }
 
     @Override
-    public boolean equals(Object element) {
-        return hashCode() == element.hashCode();
+    public boolean equals(Object o) {
+        return hashCode() == o.hashCode();
     }
 
     @Override
@@ -127,23 +139,26 @@ public class StoneSet extends StoneDoublyLinkedList implements Set<Stone>{
     }
 
     @Override
-    public Iterator<Stone> iterator() {//can
+    public Iterator<Stone> iterator() {//?
         return new Iterator_DLL();
     }
 
     @Override
     public boolean remove(Object element) {//can
+        if (element == null) {
+            throw new NullPointerException();
+        }
+
         if (!(element instanceof Stone)) {
             return false;
         }
 
-        //Stone stoneElement = (Stone) element;
         Node current = head; 
         int pos = 0;
 
         while (current != null) { 
             Stone stone = current.data;
-            if (stone.equals(element)) {
+            if (stone.equals((Stone) element)) {
                 deleteAtSpecificPosition_DLL(pos);
                 return true;
             }
@@ -165,9 +180,11 @@ public class StoneSet extends StoneDoublyLinkedList implements Set<Stone>{
         Iterator<?> iterator = collection.iterator();
         while (iterator.hasNext()) {
             Object obj = iterator.next();
+            if (obj == null) {
+                throw new NullPointerException();
+            }
             if (obj instanceof Stone) {
-                //Stone stone = (Stone) obj;
-                boolean removing = remove(obj);
+                boolean removing = remove((Stone) obj);
                 if (removing) changed = true;
             }
         }
@@ -176,7 +193,7 @@ public class StoneSet extends StoneDoublyLinkedList implements Set<Stone>{
     }
 
     @Override
-    public boolean retainAll(Collection<?> collection) { //can
+    public boolean retainAll(Collection<?> collection) {
         if (collection == null) {
             throw new NullPointerException();
         }
